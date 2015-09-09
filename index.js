@@ -16,7 +16,8 @@ function (opts) {
     }
 
     // Function to check if
-    Array.prototype.contentPresent = function(selector) {
+    var contentPresent = function(rule, selector) {
+        var customPseudoExp = /(.*::?)(after|before)$/;
         var hasContent = false;
         if(customPseudoExp.test(selector)) {
             rule.walkDecls(function transformDecl(decl) {
@@ -29,7 +30,7 @@ function (opts) {
     }
 
     // Define the pseudo elements to look for
-    var customPseudoExp = /(.*::?)(after|before)$/;
+
     // Define array for seelectors with missing content
     var contentAwaiting = [];
 
@@ -42,7 +43,7 @@ function (opts) {
             // and if there is content missing, add to array
             if(rule.selectors.length > 1) {
                 rule.selectors.forEach(function(selector) {
-                    if(!selector.contentPresent)
+                    if(!contentPresent(rule, selector))
                         contentAwaiting.push(selector)
                 });
             }
@@ -54,7 +55,7 @@ function (opts) {
             // only. If content is missing, add it.
             // Then remove the selector from the contentAwaiting array
             if(rule.selectors.length == 1) {
-                if(!rule.selector.contentPresent)
+                if(!contentPresent(rule, rule.selector))
                     rule.append({ prop: 'content', value: '\'\'' });
 
                 contentAwaiting.remove(rule.selector)

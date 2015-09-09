@@ -1,0 +1,32 @@
+{
+  "name": "postcss-pseudo-content-insert",
+  "version": "0.0.0",
+  "description": "PostCSS plugin inserts an empty content block into your :before and :after pseudo elements if it is missing",
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "pseudo",
+    "before",
+    "after content"
+  ],
+  "author": "Mike Street <mike@liquidlight.co.uk>",
+  "license": "MIT",
+  "repository": "mikestreety/postcss-pseudo-content-insert",
+  "bugs": {
+    "url": "https://github.com/mikestreety/postcss-pseudo-content-insert/issues"
+  },
+  "homepage": "https://github.com/mikestreety/postcss-pseudo-content-insert",
+  "dependencies": {
+    "postcss": "^5.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-mocha": "^2.1.3"
+  },
+  "scripts": {
+    "test": "gulp"
+  }
+}

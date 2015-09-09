@@ -3,18 +3,27 @@
 [PostCSS] plugin inserts an empty content block into your :before and :after pseudo elements if it is missing.
 
 [PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/mikestreety/postcss-pseudo-content-insert.svg
-[ci]:      https://travis-ci.org/mikestreety/postcss-pseudo-content-insert
+[ci-img]:  https://travis-ci.org/liquidlight/postcss-pseudo-content-insert.svg
+[ci]:      https://travis-ci.org/liquidlight/postcss-pseudo-content-insert
 
 ```css
-.foo {
-    /* Input example */
+.foo:after {
+	content: '';
+	display: block;
+}
+.foo:before {
+	display: inline-block;
 }
 ```
 
 ```css
-.foo {
-  /* Output example */
+.foo:after {
+	content: '';
+	display: block;
+}
+.foo:before {
+	display: inline-block;
+    content: '';
 }
 ```
 

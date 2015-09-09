@@ -8,15 +8,16 @@
     "postcss-plugin",
     "pseudo",
     "before",
-    "after content"
+    "after",
+    "content"
   ],
   "author": "Mike Street <mike@liquidlight.co.uk>",
   "license": "MIT",
-  "repository": "mikestreety/postcss-pseudo-content-insert",
+  "repository": "liquidlight/postcss-pseudo-content-insert",
   "bugs": {
-    "url": "https://github.com/mikestreety/postcss-pseudo-content-insert/issues"
+    "url": "https://github.com/liquidlight/postcss-pseudo-content-insert/issues"
   },
-  "homepage": "https://github.com/mikestreety/postcss-pseudo-content-insert",
+  "homepage": "https://github.com/liquidlight/postcss-pseudo-content-insert",
   "dependencies": {
     "postcss": "^5.0.2"
   },

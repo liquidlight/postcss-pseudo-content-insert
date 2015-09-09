@@ -1,0 +1,21 @@
+div {
+	color: red;
+}
+div:after {
+	content: '';
+	display: block;
+}
+div:before {
+	display: inline-block;
+}
+span::after {
+	color: orange;
+}
+span::before {
+	content: 'How you doing?';
+	font-weight: bold;
+}
+span::before,
+div::after {
+	overflow: hidden;
+}

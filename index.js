@@ -1,15 +1,16 @@
 var postcss = require('postcss');
 
-module.exports = postcss.plugin('postcss-pseudo-content-insert', function (opts) {
+module.exports = postcss.plugin('postcss-pseudo-content-insert',
+function (opts) {
     opts = opts || {};
 
     // Define the pseudo elements to look for
     var customPseudoExp = /(.*::?)(after|before)$/;
 
-    return function (css, result) {
+    return function (css) {
 
         // Step over each rule
-        css.walkRules(function(rule) {
+        css.walkRules(function (rule) {
 
             // Set flag to false
             var hasContent = false;
@@ -19,16 +20,13 @@ module.exports = postcss.plugin('postcss-pseudo-content-insert', function (opts)
                 // Loop over declarations of the rule
                 rule.walkDecls(function transformDecl(decl) {
                     // If the property = content, assign flag to true
-                    if(decl.prop == 'content')
+                    if(decl.prop === 'content')
                         hasContent = true;
                 });
 
                 // If flag is still false, append an empty content
                 if(!hasContent)
-                    rule.append({
-                        prop:'content',
-                        value: "''"
-                    });
+                    rule.append({ prop: 'content', value: '\'\'' });
             }
         });
 

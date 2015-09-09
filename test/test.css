@@ -1,21 +1,39 @@
-div {
-	color: red;
-}
-div:after {
-	content: '';
-	display: block;
-}
-div:before {
-	display: inline-block;
-}
-span::after {
-	color: orange;
-}
-span::before {
-	content: 'How you doing?';
+h1 {
 	font-weight: bold;
 }
+h1:after {
+	content: '';
+	display: block;
+	width: 20px;
+}
+h2:before {
+	display: inline-block;
+	height: 10px;
+}
+
+div {
+	position: relative;
+}
+div:before,
+div:after,
+span::before {
+	position: absolute;
+	content: '';
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 50%;
+}
+div:after {
+	left: auto;
+	right: 0;
+}
+
 span::before,
-div::after {
-	overflow: hidden;
+span::after {
+	display: inline-block;
+	color: red;
+}
+span::after {
+	content: '?'
 }

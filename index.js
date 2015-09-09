@@ -15,27 +15,22 @@ function (opts) {
         return false;
     }
 
-    // Function to check if
-    var contentPresent = function(rule, selector) {
-        var customPseudoExp = /(.*::?)(after|before)$/;
-        var hasContent = false;
-        if(customPseudoExp.test(selector)) {
-            rule.walkDecls(function transformDecl(decl) {
-                // If the property = content, assign flag to true
-                if(decl.prop === 'content')
-                    hasContent = true;
-            });
+    // Checks to see if a value exists in an array
+    Array.prototype.hasValue = function(value) {
+        var idx = this.indexOf(value);
+        if (idx != -1) {
+            return true;
         }
-        return hasContent;
+        return false;
     }
 
-    // Define the pseudo elements to look for
-
-    // Define array for seelectors with missing content
+    // Define array for seelectors with missing content & present
     var contentAwaiting = [];
+    var contentPresent = [];
 
 
     return function (css, result) {
+        var customPseudoExp = /(.*::?)(after|before)$/;
 
         // Step over each rule
         css.walkRules(function (rule) {
@@ -43,8 +38,21 @@ function (opts) {
             // and if there is content missing, add to array
             if(rule.selectors.length > 1) {
                 rule.selectors.forEach(function(selector) {
-                    if(!contentPresent(rule, selector))
-                        contentAwaiting.push(selector)
+                    var hasContent = false;
+                    if(customPseudoExp.test(selector)) {
+                        rule.walkDecls(function transformDecl(decl) {
+                            // If the property = content, assign flag to true
+                            if(decl.prop === 'content')
+                                hasContent = true;
+                        });
+                    }
+                    if(!hasContent) {
+                        if(!contentPresent.hasValue(selector))
+                            contentAwaiting.push(selector);
+                    } else {
+                        if(!contentPresent.hasValue(selector))
+                            contentPresent.push(selector);
+                    }
                 });
             }
         });
@@ -55,9 +63,18 @@ function (opts) {
             // only. If content is missing, add it.
             // Then remove the selector from the contentAwaiting array
             if(rule.selectors.length == 1) {
-                if(!contentPresent(rule, rule.selector))
+                var hasContent = false;
+                if(customPseudoExp.test(rule.selector)) {
+                    rule.walkDecls(function transformDecl(decl) {
+                        // If the property = content, assign flag to true
+                        if(decl.prop === 'content')
+                            hasContent = true;
+                    });
+                }
+                if(!hasContent)
                     rule.append({ prop: 'content', value: '\'\'' });
 
+                // Remove the selector from contentAwaiting array
                 contentAwaiting.remove(rule.selector)
 
             }

@@ -1,6 +1,6 @@
 {
   "name": "postcss-pseudo-content-insert",
-  "version": "0.0.0",
+  "version": "0.1",
   "description": "PostCSS plugin inserts an empty content block into your :before and :after pseudo elements if it is missing",
   "keywords": [
     "postcss",

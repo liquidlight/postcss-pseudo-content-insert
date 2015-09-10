@@ -45,12 +45,12 @@ function (opts) {
                             if(decl.prop === 'content')
                                 hasContent = true;
                         });
+                        if(!arrayHasValue(contentPresent, selector))
+                            if(!hasContent)
+                                contentAwaiting.push(selector);
+                            else
+                                contentPresent.push(selector);
                     }
-                    if(!arrayHasValue(contentPresent, selector))
-                        if(!hasContent)
-                            contentAwaiting.push(selector);
-                        else
-                            contentPresent.push(selector);
                 });
             }
         });
@@ -68,12 +68,13 @@ function (opts) {
                         if(decl.prop === 'content')
                             hasContent = true;
                     });
-                }
-                if(!hasContent)
-                    rule.append({ prop: 'content', value: '\'\'' });
 
-                // Remove the selector from contentAwaiting array
-                removeFromArray(contentAwaiting, rule.selector);
+                    if(!hasContent)
+                        rule.append({ prop: 'content', value: '\'\'' });
+
+                    // Remove the selector from contentAwaiting array
+                    removeFromArray(contentAwaiting, rule.selector);
+                }
 
             }
         });

@@ -24,12 +24,19 @@ function (opts) {
         return false;
     }
 
+    // Adds an element to an array
+    // Checks to see if it exists
+    function addToArray(arr, selector) {
+        if(!arrayHasValue(arr, selector))
+            arr.push(selector);
+    }
+
     // Define array for seelectors with missing content & present
     var contentAwaiting = [];
     var contentPresent = [];
 
 
-    return function (css, result) {
+    return function (css) {
         var customPseudoExp = /(.*::?)(after|before)$/;
 
         // Step over each rule
@@ -45,11 +52,10 @@ function (opts) {
                             if(decl.prop === 'content')
                                 hasContent = true;
                         });
-                        if(!arrayHasValue(contentPresent, selector))
-                            if(!hasContent)
-                                contentAwaiting.push(selector);
-                            else
-                                contentPresent.push(selector);
+                        if(!hasContent)
+                            addToArray(contentAwaiting, selector);
+                        else
+                            addToArray(contentPresent, selector);
                     }
                 });
             }

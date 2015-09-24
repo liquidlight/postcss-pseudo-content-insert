@@ -85,13 +85,10 @@ function (opts) {
             }
         });
 
-        // If there is stuff left without a content block, let the user know!
-        if(contentAwaiting.length) {
-            var contentAwaitingSt = contentAwaiting.join(', ');
-            result.warn(
-                'The following selectors do not have any content: ' +
-                contentAwaitingSt
-            );
+        for (var i = 0; i < contentAwaiting.length; i++) {
+            css.append(postcss.rule({
+                selector: contentAwaiting[i]
+            }).append({ prop: 'content', value: '\'\'' }));
         }
 
 

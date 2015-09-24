@@ -19,7 +19,6 @@ div:before,
 div:after,
 span::before {
 	position: absolute;
-	content: '';
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -38,4 +37,10 @@ span::after {
 }
 span::after {
 	content: '?'
+}
+div:before {
+	content: '';
+}
+span::before {
+	content: '';
 }

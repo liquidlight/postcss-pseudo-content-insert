@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/liquidlight/postcss-pseudo-content-insert",
   "dependencies": {
-    "postcss": "^5.0.2"
+    "postcss": "^8.2.13"
   },
   "devDependencies": {
     "chai": "^3.2.0",
